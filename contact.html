@@ -31,7 +31,15 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
-
+<style>
+    .navbar-brand img {
+        max-height: 230px; /* or 80px, depending on your needs */
+        width: auto;
+        height: auto;
+        margin-top: -100px; /* Adjust this value to move the logo up or down */
+        margin-bottom: -100px;
+    }
+</style>
 <body>
     <!-- Spinner Start -->
     <div id="spinner"
@@ -45,12 +53,13 @@
     <div class="container-fluid bg-primary text-white d-none d-lg-flex wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-3">
             <div class="d-flex align-items-center">
-                <a href="index.html">
-                    <h2 class="text-white fw-bold m-0">WELDORK</h2>
-                </a>
+        <a href="index.html" class="navbar-brand">
+  <img src="img/logo.png" alt="Weldork Logo" class="img-fluid">
+</a>
+
                 <div class="ms-auto d-flex align-items-center">
-                    <small class="ms-4"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</small>
-                    <small class="ms-4"><i class="fa fa-envelope me-3"></i>info@example.com</small>
+                    <small class="ms-4"><i class="fa fa-map-marker-alt me-3"></i>Norwich Union House, Mamangina Street</small>
+                    <small class="ms-4"><i class="fa fa-envelope me-3"></i>info@loop&logic.com</small>
                     <small class="ms-4"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</small>
                     <div class="ms-3 d-flex">
                         <a class="btn btn-sm-square btn-light text-primary ms-2" href=""><i
@@ -86,11 +95,8 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu bg-light rounded-0 rounded-bottom m-0">
-                                <a href="feature.html" class="dropdown-item">Features</a>
-                                <a href="team.html" class="dropdown-item">Our Team</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                                  <a href="team.html" class="dropdown-item">Our Team</a>
                                 <a href="appoinment.html" class="dropdown-item">Appoinment</a>
-                                <a href="404.html" class="dropdown-item">404 Page</a>
                             </div>
                         </div>
                         <a href="contact.html" class="nav-item nav-link active">Contact</a>
@@ -135,7 +141,9 @@
                     <div class="col-lg-6 pe-lg-5 wow fadeIn" data-wow-delay="0.3s">
                         <h1 class="display-6 text-uppercase text-white mb-4">Have Any Query? Feel Free To Contact Us
                         </h1>
-                        <p class="text-white mb-5 wow fadeIn" data-wow-delay="0.4s">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
+                        <p class="text-white mb-5 wow fadeIn" data-wow-delay="0.4s">The contact form is currently inactive. Get 
+                            a functional and working contact form with Ajax 
+                            & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
                         <div class="d-flex align-items-start wow fadeIn" data-wow-delay="0.5s">
                             <div class="btn-lg-square bg-white">
                                 <i class="bi bi-envelope-at text-dark fs-3"></i>
@@ -202,7 +210,7 @@
         </div>
         <div class="container-fluid px-0 wow fadeInUp" data-wow-delay="0.5s">
             <iframe class="w-100 h-100"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1994.7406851503173!2d36.8219462157555!3d-1.283329035631092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d5c146c7a1%3A0x3ea2f98327c876d6!2sNorwich%20Union%20House%2C%20Nairobi%2C%20Kenya!5e0!3m2!1sen!2ske!4v1691251999870!5m2!1sen!2ske"
             frameborder="0" style="min-height: 500px; border:0;" allowfullscreen="" aria-hidden="false"
             tabindex="0"></iframe>
         </div>
@@ -210,7 +218,6 @@
     <!-- Contact End -->
 
 
-    <!-- Newsletter Start -->
     <div class="container-fluid newsletter mt-6 wow fadeIn" data-wow-delay="0.1s">
         <div class="container pb-5">
             <div class="bg-white p-5 mb-5">
@@ -219,7 +226,7 @@
                         <h1 class="display-6 text-uppercase mb-4">Newsletter</h1>
                         <div class="d-flex">
                             <i class="far fa-envelope-open fa-3x text-primary me-4"></i>
-                            <p class="fs-5 fst-italic mb-0">Dolores sed duo clita tempor justo dolor et stet lorem kasd labore lorem ipsum.</p>
+                            <p class="fs-5 fst-italic mb-0">Subscribe to our newsletter to get the latest updates and offers</p>
                         </div>
                     </div>
                     <div class="col-md-6 wow fadeIn" data-wow-delay="0.5s">
@@ -233,7 +240,7 @@
             </div>
         </div>
     </div>
-    <!-- Newsletter End -->
+    <!-- Newsletter Start -->
 
 
     <!-- Footer Start -->
@@ -242,7 +249,7 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-uppercase text-light mb-4">Our Office</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary me-3"></i>123 Street, New York, USA</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary me-3"></i>Norwich Union House, Mamangina Street</p>
                     <p class="mb-2"><i class="fa fa-phone-alt text-primary me-3"></i>+012 345 67890</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary me-3"></i>info@example.com</p>
                     <div class="d-flex pt-3">
@@ -267,13 +274,13 @@
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-uppercase text-light mb-4">Business Hours</h5>
                     <p class="text-uppercase mb-0">Monday - Friday</p>
-                    <p>09:00 am - 07:00 pm</p>
+                    <p>09:00 am - 05:00 pm</p>
                     <p class="text-uppercase mb-0">Saturday</p>
-                    <p>09:00 am - 12:00 pm</p>
+                    <p>09:00 am - 03:00 pm</p>
                     <p class="text-uppercase mb-0">Sunday</p>
                     <p>Closed</p>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <!--div class="col-lg-3 col-md-6">
                     <h5 class="text-uppercase text-light mb-4">Gallery</h5>
                     <div class="row g-1">
                         <div class="col-4">
@@ -295,7 +302,7 @@
                             <img class="img-fluid" src="img/service-6.jpg" alt="">
                         </div>
                     </div>
-                </div>
+                </div-->
             </div>
         </div>
     </div>
@@ -305,17 +312,7 @@
     <!-- Copyright Start -->
     <div class="container-fluid text-body copyright py-4">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="fw-semi-bold" href="#">Your Site Name</a>, All Right Reserved.
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                    <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                    <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                    Designed By <a class="fw-semi-bold" href="https://htmlcodex.com">HTML Codex</a>
-                </div>
-            </div>
+           
         </div>
     </div>
     <!-- Copyright End -->
