@@ -666,7 +666,26 @@
         <button class="btn btn-primary w-100 py-3" type="submit">Subscribe</button>
     </form>
 </div>
+<div id="newsletterMessage" class="mt-3 text-success fw-bold" style="display:none;">
+        ✅ Thanks for subscribing!
+    </div>
+</div>
 
+<script>
+document.getElementById("newsletterForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // Prevents page reload
+    const emailInput = document.getElementById("newsletterEmail");
+
+    if (emailInput.value.trim() !== "") {
+        document.getElementById("newsletterMessage").style.display = "block";
+        emailInput.value = ""; // Clear the input field
+
+        setTimeout(() => {
+            document.getElementById("newsletterMessage").style.display = "none";
+        }, 5000); // Hide message after 5 seconds
+    }
+});
+</script>
                 </div>
             </div>
         </div>
