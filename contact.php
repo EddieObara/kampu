@@ -1,4 +1,9 @@
 <?php
+require 'vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -21,9 +26,8 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp-relay.brevo.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'loopandlogic6@gmail.com';  // Your Brevo sender email
-    $mail->Password   = 'xsmtpsib-cab599c4e1153fe1c44586dea4723da0c2b48e1477a22c51838703e2bb39a2ce-RfxPysjSwFMvHAgT'; // Your Brevo SMTP Key
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Username   = $_ENV['BREVO_USERNAME'];
+    $mail->Password   = $_ENV['BREVO_PASSWORD'];
     $mail->Port       = 587;
 
     // Recipients
