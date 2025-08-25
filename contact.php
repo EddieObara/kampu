@@ -22,7 +22,7 @@ try {
     $mail->Host       = 'smtp-relay.brevo.com';
     $mail->SMTPAuth   = true;
     $mail->Username   = 'loopandlogic6@gmail.com';  // Your Brevo sender email
-    $mail->Password   = '7mzHySgcDaOIEx2Q';        // Your Brevo SMTP Key
+    $mail->Password   = 'xsmtpsib-cab599c4e1153fe1c44586dea4723da0c2b48e1477a22c51838703e2bb39a2ce-RfxPysjSwFMvHAgT'; // Your Brevo SMTP Key
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
@@ -48,7 +48,7 @@ try {
     exit;
 
 } catch (Exception $e) {
-    // Redirect back with error
-    header("Location: $redirectPage?error=1");
+    // Redirect back with PHPMailer error
+    header("Location: $redirectPage?error=" . urlencode($mail->ErrorInfo));
     exit;
 }
