@@ -40,7 +40,7 @@ try {
         <p><b>Mobile:</b> {$mobile}</p>
         <p><b>Message:</b><br>{$message}</p>
     ";
-
+ 
     $mail->send();
 
     // Redirect back to the page the form was submitted from
