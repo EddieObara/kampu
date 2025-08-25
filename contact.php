@@ -1,13 +1,8 @@
 <?php
-require 'vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php';
+require 'vendor/autoload.php'; // Composer autoload for PHPMailer
 
 // Collect form data safely
 $name    = $_POST['name'] ?? '';
@@ -16,25 +11,27 @@ $mobile  = $_POST['mobile'] ?? '';
 $subject = $_POST['subject'] ?? '';
 $message = $_POST['message'] ?? '';
 
-// Check if form is submitted from index.html or contact.html
-$redirectPage = $_SERVER['HTTP_REFERER'] ?? 'index.html'; 
+// Detect which page the form was submitted from
+$redirectPage = $_SERVER['HTTP_REFERER'] ?? 'index.html';
 
 $mail = new PHPMailer(true);
 
 try {
-    // Server settings
+    // SMTP settings using Render environment variables
     $mail->isSMTP();
     $mail->Host       = 'smtp-relay.brevo.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = $_ENV['BREVO_USERNAME'];
-    $mail->Password   = $_ENV['BREVO_PASSWORD'];
+    $mail->Username   = getenv('SMTP_USERNAME'); // from Render env
+    $mail->Password   = getenv('SMTP_PASSWORD'); // from Render env
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
     // Recipients
-    $mail->setFrom('loopandlogic6@gmail.com', 'Website Contact Form');
-    $mail->addAddress('loopandlogic6@gmail.com'); // Where you’ll receive the emails
+    $mail->setFrom(getenv('SMTP_FROM'), getenv('SMTP_FROM_NAME'));
+    $mail->addAddress(getenv('SMTP_TO')); 
+    $mail->addReplyTo($email, $name);
 
-    // Content
+    // Email content
     $mail->isHTML(true);
     $mail->Subject = !empty($subject) ? $subject : 'New Contact Form Submission';
     $mail->Body    = "
@@ -42,9 +39,10 @@ try {
         <p><b>Name:</b> {$name}</p>
         <p><b>Email:</b> {$email}</p>
         <p><b>Mobile:</b> {$mobile}</p>
+        <p><b>Subject:</b> {$subject}</p>
         <p><b>Message:</b><br>{$message}</p>
     ";
- 
+
     $mail->send();
 
     // Redirect back to the page the form was submitted from
@@ -56,5 +54,3 @@ try {
     header("Location: $redirectPage?error=" . urlencode($mail->ErrorInfo));
     exit;
 }
-
-
