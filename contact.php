@@ -2,7 +2,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php'; // Composer autoload for PHPMailer
+require 'vendor/autoload.php';
 
 // Collect form data safely
 $name    = $_POST['name'] ?? '';
@@ -11,24 +11,24 @@ $mobile  = $_POST['mobile'] ?? '';
 $subject = $_POST['subject'] ?? '';
 $message = $_POST['message'] ?? '';
 
-// Detect which page the form was submitted from
-$redirectPage = $_SERVER['HTTP_REFERER'] ?? 'index.html';
+// Determine which page the form was submitted from
+$redirectPage = $_SERVER['HTTP_REFERER'] ?? 'index.html'; 
 
 $mail = new PHPMailer(true);
 
 try {
-    // SMTP settings using Render environment variables
+    // SMTP settings (Brevo)
     $mail->isSMTP();
     $mail->Host       = 'smtp-relay.brevo.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = getenv('SMTP_USERNAME'); // from Render env
-    $mail->Password   = getenv('SMTP_PASSWORD'); // from Render env
+    $mail->Username   = getenv('SMTP_USERNAME'); // Brevo SMTP login: 958a61001@smtp-brevo.com
+    $mail->Password   = getenv('SMTP_PASSWORD'); // Brevo SMTP key
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
-    // Recipients
-    $mail->setFrom(getenv('SMTP_FROM'), getenv('SMTP_FROM_NAME'));
-    $mail->addAddress(getenv('SMTP_TO')); 
+    // Sender & recipient
+    $mail->setFrom(getenv('SMTP_FROM'), getenv('SMTP_FROM_NAME')); // e.g., loopandlogic6@gmail.com, Website Contact Form
+    $mail->addAddress(getenv('SMTP_TO')); // recipient email
     $mail->addReplyTo($email, $name);
 
     // Email content
@@ -41,6 +41,7 @@ try {
         <p><b>Mobile:</b> {$mobile}</p>
         <p><b>Subject:</b> {$subject}</p>
         <p><b>Message:</b><br>{$message}</p>
+        
     ";
 
     $mail->send();
@@ -54,3 +55,4 @@ try {
     header("Location: $redirectPage?error=" . urlencode($mail->ErrorInfo));
     exit;
 }
+?>
