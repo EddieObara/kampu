@@ -50,14 +50,14 @@ try {
 
 try {
     $reply->isSMTP();
-    $reply->Host = SMTP_HOST;
+    $reply->Host = $_ENV['SMTP_HOST'];;
     $reply->SMTPAuth = true;
-    $reply->Username = SMTP_USER;
-    $reply->Password = SMTP_PASS;
+    $reply->Username = $_ENV['SMTP_USERNAME'];
+    $reply->Password = $_ENV['SMTP_PASSWORD'];
     $reply->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $reply->Port = SMTP_PORT;
+    $reply->Port = $_ENV['SMTP_PORT'];
 
-    $reply->setFrom(SMTP_FROM, SMTP_FROM_NAME);
+    $reply->setFrom($_ENV['SMTP_FROM'], $_ENV['SMTP_FROM_NAME']);
     $reply->addAddress($email, $name);
 
     $reply->isHTML(true);
