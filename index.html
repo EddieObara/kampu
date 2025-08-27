@@ -798,19 +798,30 @@ document.getElementById("contact-form").addEventListener("submit", async functio
     const data = await res.json();
 
     if (data.success) {
-      responseDiv.style.color = "green";
-      responseDiv.textContent = "✅ Message sent successfully!";
-      form.reset(); // Clear the form
-    } else {
-      responseDiv.style.color = "red";
-      responseDiv.textContent = "❌ " + (data.error || "Something went wrong.");
-    }
-  } catch (err) {
-    responseDiv.style.color = "red";
-    responseDiv.textContent = "⚠️ Error sending message. Please try again later.";
-    console.error("Contact form error:", err);
-  }
-});
+  responseDiv.style.color = "green";
+  responseDiv.textContent = "✅ " + data.message;
+  form.reset();
+
+  // Fade away after 4 seconds
+  setTimeout(() => {
+    responseDiv.style.transition = "opacity 1s ease";
+    responseDiv.style.opacity = "0";
+    setTimeout(() => {
+      responseDiv.textContent = "";
+      responseDiv.style.opacity = "1"; // reset for next time
+    }, 1000);
+  }, 4000);
+
+} else {
+  responseDiv.style.color = "red";
+  responseDiv.textContent = "❌ " + (data.error || "Something went wrong.");
+
+  // Stay visible for 10 seconds, then clear
+  setTimeout(() => {
+    responseDiv.textContent = "";
+  }, 10000);
+}
+
 </script>
 
 </body>
