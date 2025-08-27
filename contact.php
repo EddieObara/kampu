@@ -4,7 +4,6 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-// Collect form data safely
 $name    = $_POST['name'] ?? '';
 $email   = $_POST['email'] ?? '';
 $mobile  = $_POST['mobile'] ?? '';
@@ -32,7 +31,7 @@ try {
     $mail->addAddress(getenv('SMTP_TO'));
     $mail->addReplyTo($email, $name);
 
-    // Email content
+    // Email content (Admin receives this)
     $mail->isHTML(true);
     $mail->Subject = !empty($subject) ? $subject : 'New Contact Form Submission';
     $mail->Body    = "
@@ -41,12 +40,37 @@ try {
         <p><b>Email:</b> {$email}</p>
         <p><b>Mobile:</b> {$mobile}</p>
         <p><b>Service:</b> {$service}</p> <!-- ✅ Service now included -->
-        
         <p><b>Message:</b><br>{$message}</p>
     ";
 
     $mail->send();
 
+    // ✅ AUTO-REPLY to sender
+    $reply = new PHPMailer(true);
+    $reply->isSMTP();
+    $reply->Host       = 'smtp-relay.brevo.com';
+    $reply->SMTPAuth   = true;
+    $reply->Username   = getenv('SMTP_USERNAME'); 
+    $reply->Password   = getenv('SMTP_PASSWORD'); 
+    $reply->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $reply->Port       = 587;
+
+    // From company → to user
+    $reply->setFrom(getenv('SMTP_FROM'), getenv('SMTP_FROM_NAME'));
+    $reply->addAddress($email, $name);
+
+    $reply->isHTML(true);
+    $reply->Subject = "Thank you for contacting us!";
+    $reply->Body    = "
+        <p>Hi <b>{$name}</b>,</p>
+        <p>Thank you for reaching out regarding <b>{$service}</b>. We’ve received your message and our team will get back to you shortly.</p>
+        <p><b>Your Message:</b><br>{$message}</p>
+        <p>Best regards,<br>" . getenv('SMTP_FROM_NAME') . "</p>
+    ";
+
+    $reply->send();
+
+    // ✅ Redirect with success
     header("Location: $redirectPage?success=1");
     exit;
 
