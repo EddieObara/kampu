@@ -71,9 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $reply->send();
 
-        echo json_encode(['status' => 'success', 'message' => 'Message sent successfully!']);
+        echo json_encode(['success' => true, 'message' => 'Message sent successfully!']);
     } catch (Exception $e) {
-        echo json_encode(['status' => 'error', 'message' => "Mailer Error: {$mail->ErrorInfo}"]);
+        echo json_encode(['success' => false, 'error' => "Mailer Error: {$mail->ErrorInfo}"]);
     }
 }
 ?>
