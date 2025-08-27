@@ -4,54 +4,52 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-// Sanitize input
-$name    = htmlspecialchars(trim($_POST['name'] ?? ''));
-$email   = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
-$mobile  = htmlspecialchars(trim($_POST['mobile'] ?? ''));
-$subject = htmlspecialchars(trim($_POST['subject'] ?? ''));
-$message = htmlspecialchars(trim($_POST['message'] ?? ''));
+// Collect form data safely
+$name    = $_POST['name'] ?? '';
+$email   = $_POST['email'] ?? '';
+$mobile  = $_POST['mobile'] ?? '';
+$subject = $_POST['subject'] ?? '';
+$message = $_POST['message'] ?? '';
+$service = $_POST['service'] ?? ''; // ✅ New field added
 
-// Secure redirect
-$redirectPage = $_SERVER['HTTP_REFERER'] ?? 'index.html';
-$allowedPages = ['index.html', 'contact.html'];
-$parsedUrl = parse_url($redirectPage, PHP_URL_PATH);
-if (!in_array(basename($parsedUrl), $allowedPages)) {
-    $redirectPage = 'index.html';
-}
+// Determine which page the form was submitted from
+$redirectPage = $_SERVER['HTTP_REFERER'] ?? 'index.html'; 
 
 $mail = new PHPMailer(true);
 
 try {
+    // SMTP settings (Brevo)
     $mail->isSMTP();
     $mail->Host       = 'smtp-relay.brevo.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = getenv('SMTP_USERNAME');
-    $mail->Password   = getenv('SMTP_PASSWORD');
+    $mail->Username   = getenv('SMTP_USERNAME'); 
+    $mail->Password   = getenv('SMTP_PASSWORD'); 
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
+    // Sender & recipient
     $mail->setFrom(getenv('SMTP_FROM'), getenv('SMTP_FROM_NAME'));
     $mail->addAddress(getenv('SMTP_TO'));
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $mail->addReplyTo($email, $name);
-    }
+    $mail->addReplyTo($email, $name);
 
-    
+    // Email content
     $mail->isHTML(true);
-    $mail->Subject = $subject ?: 'New Contact Form Submission';
+    $mail->Subject = !empty($subject) ? $subject : 'New Contact Form Submission';
     $mail->Body    = "
-        <h3>New message from contact form:</h3>
+        <h3>You have a new message from your website contact form:</h3>
         <p><b>Name:</b> {$name}</p>
         <p><b>Email:</b> {$email}</p>
         <p><b>Mobile:</b> {$mobile}</p>
+        <p><b>Service:</b> {$service}</p> <!-- ✅ Service now included -->
         <p><b>Subject:</b> {$subject}</p>
         <p><b>Message:</b><br>{$message}</p>
     ";
-    $mail->AltBody = "Name: $name\nEmail: $email\nMobile: $mobile\nSubject: $subject\nMessage:\n$message";
 
     $mail->send();
+
     header("Location: $redirectPage?success=1");
     exit;
+
 } catch (Exception $e) {
     header("Location: $redirectPage?error=" . urlencode($mail->ErrorInfo));
     exit;
