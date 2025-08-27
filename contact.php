@@ -46,14 +46,32 @@ try {
     $mail->send();
 
     // ✅ AUTO-REPLY to sender
-    $reply = new PHPMailer(true);
+   $reply = new PHPMailer(true);
+
+try {
     $reply->isSMTP();
-    $reply->Host       = 'smtp-relay.brevo.com';
-    $reply->SMTPAuth   = true;
-    $reply->Username   = getenv('SMTP_USERNAME'); 
-    $reply->Password   = getenv('SMTP_PASSWORD'); 
+    $reply->Host = SMTP_HOST;
+    $reply->SMTPAuth = true;
+    $reply->Username = SMTP_USER;
+    $reply->Password = SMTP_PASS;
     $reply->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $reply->Port       = 587;
+    $reply->Port = SMTP_PORT;
+
+    $reply->setFrom(SMTP_FROM, SMTP_FROM_NAME);
+    $reply->addAddress($email, $name);
+
+    $reply->isHTML(true);
+    $reply->Subject = "Thank you for contacting us!";
+    $reply->Body    = "Hi {$name},<br><br>We have received your message and will get back to you shortly.<br><br>Best regards,<br>Team";
+
+    // Enable debugging (only for this client reply)
+    $reply->SMTPDebug = 2; // or 3 for even more details
+    $reply->Debugoutput = 'error_log'; // log to PHP error log
+
+    $reply->send();
+} catch (Exception $e) {
+    error_log("Auto-reply failed: {$reply->ErrorInfo}");
+}
 
     // From company → to user
     $reply->setFrom(getenv('SMTP_FROM'), getenv('SMTP_FROM_NAME'));
