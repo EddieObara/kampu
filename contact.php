@@ -9,15 +9,14 @@ $email   = $_POST['email'] ?? '';
 $mobile  = $_POST['mobile'] ?? '';
 $subject = $_POST['subject'] ?? '';
 $message = $_POST['message'] ?? '';
-$service = $_POST['service'] ?? ''; // ✅ New field added
+$service = $_POST['service'] ?? '';
 
-// Determine which page the form was submitted from
 $redirectPage = $_SERVER['HTTP_REFERER'] ?? 'index.html'; 
 
 $mail = new PHPMailer(true);
 
 try {
-    // SMTP settings (Brevo)
+    // --- SEND TO ADMIN ---
     $mail->isSMTP();
     $mail->Host       = 'smtp-relay.brevo.com';
     $mail->SMTPAuth   = true;
@@ -26,12 +25,10 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
-    // Sender & recipient
     $mail->setFrom(getenv('SMTP_FROM'), getenv('SMTP_FROM_NAME'));
     $mail->addAddress(getenv('SMTP_TO'));
     $mail->addReplyTo($email, $name);
 
-    // Email content (Admin receives this)
     $mail->isHTML(true);
     $mail->Subject = !empty($subject) ? $subject : 'New Contact Form Submission';
     $mail->Body    = "
@@ -39,41 +36,22 @@ try {
         <p><b>Name:</b> {$name}</p>
         <p><b>Email:</b> {$email}</p>
         <p><b>Mobile:</b> {$mobile}</p>
-        <p><b>Service:</b> {$service}</p> <!-- ✅ Service now included -->
+        <p><b>Service:</b> {$service}</p>
         <p><b>Message:</b><br>{$message}</p>
     ";
 
     $mail->send();
 
-    // ✅ AUTO-REPLY to sender
-   $reply = new PHPMailer(true);
-
-try {
+    // --- AUTO-REPLY TO USER ---
+    $reply = new PHPMailer(true);
     $reply->isSMTP();
-    $reply->Host = $_ENV['SMTP_HOST'];;
-    $reply->SMTPAuth = true;
-    $reply->Username = $_ENV['SMTP_USERNAME'];
-    $reply->Password = $_ENV['SMTP_PASSWORD'];
+    $reply->Host       = 'smtp-relay.brevo.com';
+    $reply->SMTPAuth   = true;
+    $reply->Username   = getenv('SMTP_USERNAME');
+    $reply->Password   = getenv('SMTP_PASSWORD');
     $reply->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $reply->Port = $_ENV['SMTP_PORT'];
+    $reply->Port       = 587;
 
-    $reply->setFrom($_ENV['SMTP_FROM'], $_ENV['SMTP_FROM_NAME']);
-    $reply->addAddress($email, $name);
-
-    $reply->isHTML(true);
-    $reply->Subject = "Thank you for contacting us!";
-    $reply->Body    = "Hi {$name},<br><br>We have received your message and will get back to you shortly.<br><br>Best regards,<br>Team";
-
-    // Enable debugging (only for this client reply)
-    $reply->SMTPDebug = 2; // or 3 for even more details
-    $reply->Debugoutput = 'error_log'; // log to PHP error log
-
-    $reply->send();
-} catch (Exception $e) {
-    error_log("Auto-reply failed: {$reply->ErrorInfo}");
-}
-
-    // From company → to user
     $reply->setFrom(getenv('SMTP_FROM'), getenv('SMTP_FROM_NAME'));
     $reply->addAddress($email, $name);
 
@@ -86,9 +64,12 @@ try {
         <p>Best regards,<br>" . getenv('SMTP_FROM_NAME') . "</p>
     ";
 
+    // 🔍 Debug logs (check PHP error_log)
+    $reply->SMTPDebug = 2;
+    $reply->Debugoutput = 'error_log';
+
     $reply->send();
 
-    // ✅ Redirect with success
     header("Location: $redirectPage?success=1");
     exit;
 
