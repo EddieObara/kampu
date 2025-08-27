@@ -36,6 +36,7 @@ try {
         $mail->addReplyTo($email, $name);
     }
 
+    
     $mail->isHTML(true);
     $mail->Subject = $subject ?: 'New Contact Form Submission';
     $mail->Body    = "
