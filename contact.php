@@ -11,7 +11,74 @@ $subject = $_POST['subject'] ?? '';
 $message = $_POST['message'] ?? '';
 $service = $_POST['service'] ?? '';
 
-$redirectPage = $_SERVER['HTTP_REFERER'] ?? 'index.html'; 
+$redirectPage =<?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = htmlspecialchars($_POST['name']);
+    $email = htmlspecialchars($_POST['email']);
+    $message = htmlspecialchars($_POST['message']);
+
+    $mail = new PHPMailer(true);
+    try {
+        // SMTP config
+        $mail->isSMTP();
+        $mail->Host       = getenv('SMTP_HOST');
+        $mail->SMTPAuth   = true;
+        $mail->Username   = getenv('SMTP_USERNAME');
+        $mail->Password   = getenv('SMTP_PASSWORD');
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
+
+        // Sender & recipient
+        $mail->setFrom(getenv('SMTP_FROM'), getenv('SMTP_FROM_NAME'));
+        $mail->addAddress(getenv('SMTP_TO'));
+        $mail->addReplyTo($email, $name);
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = "New Contact Form Submission";
+        $mail->Body    = "<b>Name:</b> $name<br><b>Email:</b> $email<br><b>Message:</b><br>$message";
+
+        $mail->send();
+
+        // -------------------
+        // AUTO-REPLY SECTION
+        // -------------------
+        $reply = new PHPMailer(true);
+        try {
+            $reply->isSMTP();
+            $reply->Host       = getenv('SMTP_HOST');
+            $reply->SMTPAuth   = true;
+            $reply->Username   = getenv('SMTP_USERNAME');
+            $reply->Password   = getenv('SMTP_PASSWORD');
+            $reply->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $reply->Port       = 587;
+
+            $reply->setFrom(getenv('SMTP_FROM'), getenv('SMTP_FROM_NAME'));
+            $reply->addAddress($email, $name); // Send back to client
+
+            $reply->isHTML(true);
+            $reply->Subject = "Thank you for contacting us!";
+            $reply->Body    = "Hi $name,<br><br>We’ve received your message and will get back to you soon.<br><br>Best regards,<br>".getenv('SMTP_FROM_NAME');
+
+            if (!$reply->send()) {
+                error_log("Auto-reply error: " . $reply->ErrorInfo);
+            }
+        } catch (Exception $e) {
+            error_log("Auto-reply exception: " . $e->getMessage());
+        }
+
+        echo "success";
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
+?>
+ $_SERVER['HTTP_REFERER'] ?? 'index.html'; 
 
 $mail = new PHPMailer(true);
 
