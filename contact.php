@@ -18,7 +18,7 @@ header('Content-Type: application/json');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name    = htmlspecialchars($_POST['name']);
     $email   = htmlspecialchars($_POST['email']);
-    $phone   = htmlspecialchars($_POST['mobile']);
+    $mobile   = htmlspecialchars($_POST['mobile']);
     $service = htmlspecialchars($_POST['service']);
     $message = htmlspecialchars($_POST['message']);
     
@@ -76,9 +76,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $reply->send();
 
+    try {
+    if ($mail->send()) {
         echo json_encode(['success' => true, 'message' => 'Message sent successfully!']);
-    } catch (Exception $e) {
+    } else {
         echo json_encode(['success' => false, 'error' => "Mailer Error: {$mail->ErrorInfo}"]);
     }
+} catch (Exception $e) {
+    echo json_encode(['success' => false, 'error' => "Exception: {$e->getMessage()}"]);
+}
+
 }
 ?>
