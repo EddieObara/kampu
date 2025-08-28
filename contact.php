@@ -18,7 +18,10 @@ header('Content-Type: application/json');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name    = htmlspecialchars($_POST['name']);
     $email   = htmlspecialchars($_POST['email']);
+    $phone   = htmlspecialchars($_POST['mobile']);
+    $service = htmlspecialchars($_POST['service']);
     $message = htmlspecialchars($_POST['message']);
+    
 
     $mail = new PHPMailer(true);
 
@@ -41,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->Body    = "<h3>You have a new message from your website contact form</h3>
                           <p><strong>Name:</strong> $name</p>
                           <p><strong>Email:</strong> $email</p>
+                          <p><strong>Message:</strong> $mobile</p>
+                            <p><strong>Service:</strong> $service</p>
                           <p><strong>Message:</strong> $message</p>";
 
         $mail->send();
