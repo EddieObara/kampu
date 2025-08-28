@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $mail->setFrom(getenv('SMTP_FROM'), getenv('SMTP_FROM_NAME'));
         $mail->addAddress(getenv('SMTP_TO'));
+        $mail->addAddress(getenv('SMTP_TOO'));
         $mail->addReplyTo($email, $name);
 
         $mail->isHTML(true);
