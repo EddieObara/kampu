@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->Body    = "<h3>You have a new message from your website contact form</h3>
                           <p><strong>Name:</strong> $name</p>
                           <p><strong>Email:</strong> $email</p>
-                          <p><strong>Message:</strong> $mobile</p>
+                          <p><strong>Mobile:</strong> $mobile</p>
                             <p><strong>Service:</strong> $service</p>
                           <p><strong>Message:</strong> $message</p>";
 
