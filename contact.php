@@ -3,7 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-// Handle preflight OPTIONS request
+// If browser sends a preflight OPTIONS request, just exit
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
@@ -17,11 +17,12 @@ require 'vendor/autoload.php';
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name    = htmlspecialchars($_POST['name']);
-    $email   = htmlspecialchars($_POST['email']);
-    $mobile  = htmlspecialchars($_POST['mobile']);
-    $service = htmlspecialchars($_POST['service']);
-    $message = htmlspecialchars($_POST['message']);
+    $name     = htmlspecialchars($_POST['name']);
+    $email    = htmlspecialchars($_POST['email']);
+    $date     = htmlspecialchars($_POST['date']);
+    $time     = htmlspecialchars($_POST['time']);
+    $meeting  = htmlspecialchars($_POST['meeting']);
+    $message  = htmlspecialchars($_POST['message']);
 
     $mail = new PHPMailer(true);
 
@@ -36,29 +37,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->Port       = 587;
 
         $mail->setFrom(getenv('SMTP_FROM'), getenv('SMTP_FROM_NAME'));
-        $mail->addAddress(getenv('SMTP_TO'));   // First recipient
-        $mail->addAddress(getenv('SMTP_TOO'));  // Second recipient
+        $mail->addAddress(getenv('SMTP_TO'));
+        if (getenv('SMTP_TOO')) {
+            $mail->addAddress(getenv('SMTP_TOO'));
+        }
         $mail->addReplyTo($email, $name);
 
         $mail->isHTML(true);
-        $mail->Subject = "New Contact Form Message from $name";
-        $mail->Body    = "<h3>You have a new message from your website contact form</h3>
+        $mail->Subject = "New Appointment Request from $name";
+        $mail->Body    = "<h3>New Appointment Request</h3>
                           <p><strong>Name:</strong> $name</p>
                           <p><strong>Email:</strong> $email</p>
-                          <p><strong>Mobile:</strong> $mobile</p>
-                          <p><strong>Service:</strong> $service</p>
+                          <p><strong>Preferred Date:</strong> $date</p>
+                          <p><strong>Preferred Time:</strong> $time</p>
+                          <p><strong>Meeting Preference:</strong> $meeting</p>
                           <p><strong>Message:</strong> $message</p>";
 
-        if (!$mail->send()) {
-            throw new Exception("Mailer Error (Admin Copy): " . $mail->ErrorInfo);
-        }
+        $mail->send();
 
         // === Auto-Reply (You -> Client) ===
         $reply = new PHPMailer(true);
-
-        // toggle debugging here if needed
-        // $reply->SMTPDebug  = 2; 
-        // $reply->Debugoutput = 'error_log';
 
         $reply->isSMTP();
         $reply->Host       = getenv('SMTP_HOST');
@@ -72,27 +70,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $reply->addAddress($email, $name);
 
         $reply->isHTML(true);
-        $reply->Subject = "Thank you for contacting us!";
+        $reply->Subject = "Appointment Request Received";
         $reply->Body    = "<p>Hi $name,</p>
-                           <p>Thanks for reaching out. We have received your message and will get back to you shortly.</p>
-                           <p>Best regards,<br>Support Team</p>";
+                           <p>Thank you for booking an appointment. Here are the details we received:</p>
+                           <ul>
+                             <li><strong>Date:</strong> $date</li>
+                             <li><strong>Time:</strong> $time</li>
+                             <li><strong>Meeting Type:</strong> $meeting</li>
+                           </ul>
+                           <p>We will confirm shortly. If you need to update your request, just reply to this email.</p>
+                           <p>Best regards,<br>Loop & Logic Team</p>";
 
-        if (!$reply->send()) {
-            throw new Exception("Mailer Error (Auto-Reply): " . $reply->ErrorInfo);
-        }
+        $reply->send();
 
-        // ✅ Success response
-        echo json_encode([
-            'success' => true,
-            'message' => 'Message sent successfully!'
-        ]);
-
+        echo json_encode(['success' => true, 'message' => 'Appointment request sent successfully!']);
     } catch (Exception $e) {
-        // ❌ Error response
-        echo json_encode([
-            'success' => false,
-            'error'   => $e->getMessage()
-        ]);
+        echo json_encode(['success' => false, 'error' => "Mailer Error: {$mail->ErrorInfo}"]);
     }
 }
 ?>
