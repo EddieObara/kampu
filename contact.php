@@ -71,15 +71,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $reply->isHTML(true);
         $reply->Subject = "Appointment Request Received";
-        $reply->Body    = "<p>Hi $name,</p>
-                           <p>Thank you for booking an appointment. Here are the details we received:</p>
-                           <ul>
-                             <li><strong>Date:</strong> $date</li>
-                             <li><strong>Time:</strong> $time</li>
-                             <li><strong>Meeting Type:</strong> $meeting</li>
-                           </ul>
-                           <p>We will confirm shortly. If you need to update your request, just reply to this email.</p>
-                           <p>Best regards,<br>Loop & Logic Team</p>";
+     $reply->Body = '
+  <div style="font-family: Arial, sans-serif; color:#333; margin:0; padding:0;">
+    <!-- Letterhead -->
+    <div style="text-align:center; background:#f5f5f5; padding:20px;">
+      <img src="img/Heading.png" 
+           alt="Loop & Logic Letterhead" 
+           style="max-width:100%; height:auto;">
+    </div>
+
+    <!-- Body -->
+    <div style="padding:20px;">
+      <p>Hi ' . $name . ',</p>
+      <p>Thank you for booking an appointment. Here are the details we received:</p>
+      <ul>
+        <li><strong>Date:</strong> ' . $date . '</li>
+        <li><strong>Time:</strong> ' . $time . '</li>
+        <li><strong>Meeting Type:</strong> ' . $meeting . '</li>
+      </ul>
+      <p>We will confirm shortly. If you need to update your request, just reply to this email.</p>
+      <p>Best regards,<br><strong>Loop & Logic Team</strong></p>
+    </div>
+
+    <!-- Footer -->
+    <div style="background:#0d47a1; color:white; text-align:center; padding:15px; font-size:12px;">
+      <p>Loop & Logic • Nairobi, Kenya<br>
+      <a href="https://looplogic.co.ke" style="color:#fff; text-decoration:none;">www.looplogic.co.ke</a></p>
+    </div>
+  </div>';
+
 
         $reply->send();
 
