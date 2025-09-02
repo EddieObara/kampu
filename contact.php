@@ -72,16 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $reply->isHTML(true);
         $reply->Subject = "Appointment Request Received";
      $reply->Body = '
-  <div style="font-family: Arial, sans-serif; color:#333; margin:0; padding:0;">
-    <!-- Letterhead -->
-    <div style="text-align:center; background:#f5f5f5; ;">
-      <img src="https://loopandlogic.dev/img/Heading.png" 
-           alt="Loop & Logic Letterhead" 
-           style="max-width: 500%; height:auto; text-align: center;">
-    
-
- $reply->Body = '
-  <div style="background:#f5f5f5; margin:0; padding:0; width:100%; font-family: Arial, sans-serif; color:#333;">
+  <div style="font-family: Arial, sans-serif; color:#333; margin:0; padding:0; background:#f5f5f5;">
     
     <!-- Letterhead -->
     <div style="text-align:center; padding:20px 0;">
@@ -91,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Body -->
-    <div style="background:#ffffff; padding:20px; margin: 0 auto; max-width:600px; border-radius:8px;">
+    <div style="padding:20px; background:#ffffff; border-radius:6px; margin:0 10px;">
       <p>Hi ' . $name . ',</p>
       <p>Thank you for booking an appointment. Here are the details we received:</p>
       <ul>
@@ -109,7 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="https://looplogic.co.ke" style="color:#fff; text-decoration:none;">www.looplogic.co.ke</a></p>
     </div>
   </div>';
-
 
 
         $reply->send();
