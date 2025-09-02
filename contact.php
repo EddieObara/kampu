@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div style="font-family: Arial, sans-serif; color:#333; margin:0; padding:0;">
     <!-- Letterhead -->
     <div style="text-align:center; background:#f5f5f5; padding:20px;">
-      <img src="img/Heading.png" 
+      <img src="https://loopandlogic.dev/img/Heading.png" 
            alt="Loop & Logic Letterhead" 
            style="max-width:100%; height:auto;">
     </div>
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Footer -->
     <div style="background:#0d47a1; color:white; text-align:center; padding:15px; font-size:12px;">
       <p>Loop & Logic • Nairobi, Kenya<br>
-      <a href="https://looplogic.co.ke" style="color:#fff; text-decoration:none;">www.looplogic.co.ke</a></p>
+      <a href="https://looplogic.dev" style="color:#fff; text-decoration:none;">www.loopandlogic.dev</a></p>
     </div>
   </div>';
 
