@@ -75,23 +75,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div style="font-family: Arial, sans-serif; color:#333; margin:0; padding:0; background:#f5f5f5;">
     
     <!-- Letterhead -->
-    <div style="text-align:center; padding:20px 0;">
+    <div style="text-align:center; padding:10px 0;">
       <img src="https://loopandlogic.dev/img/Heading.png" 
            alt="Loop & Logic Letterhead" 
            style="max-width:100%; height:auto;">
     </div>
 
     <!-- Body -->
-    <div style="padding:20px; background:#ffffff; border-radius:6px; margin:0 10px;">
-      <p>Hi ' . $name . ',</p>
-      <p>Thank you for booking an appointment. Here are the details we received:</p>
-      <ul>
-        <li><strong>Date:</strong> ' . $date . '</li>
-        <li><strong>Time:</strong> ' . $time . '</li>
-        <li><strong>Meeting Type:</strong> ' . $meeting . '</li>
-      </ul>
-      <p>We will confirm shortly. If you need to update your request, just reply to this email.</p>
-      <p>Best regards,<br><strong>Loop & Logic Team</strong></p>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#f4f4f4; padding:20px;">
+  <tr>
+    <td align="center">
+      <div style="max-width:600px; background:#ffffff; border-radius:6px; padding:20px; text-align:justify; font-family:Arial, sans-serif; line-height:1.6; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+        <p>Hi ' . $name . ',</p>
+        <p>Thank you for booking an appointment. Here are the details we received:</p>
+        <ul>
+          <li><strong>Date:</strong> ' . $date . '</li>
+          <li><strong>Time:</strong> ' . $time . '</li>
+          <li><strong>Meeting Type:</strong> ' . $meeting . '</li>
+        </ul>
+        <p>We will confirm shortly. If you need to update your request, just reply to this email.</p>
+        <p>Best regards,<br><strong>Loop & Logic Team</strong></p>
+      </div>
+    </td>
+  </tr>
+</table>
+
     </div>
 
     <!-- Footer -->
@@ -100,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="https://looplogic.co.ke" style="color:#fff; text-decoration:none;">www.looplogic.co.ke</a></p>
     </div>
   </div>';
-
 
         $reply->send();
 
