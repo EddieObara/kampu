@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      $reply->Body = '
   <div style="font-family: Arial, sans-serif; color:#333; margin:0; padding:0;">
     <!-- Letterhead -->
-    <div style="text-align:center; background:#f5f5f5; padding:20px;">
+    <div style="text-align:center; background:#f5f5f5; padding:0px;">
       <img src="https://loopandlogic.dev/img/Heading.png" 
            alt="Loop & Logic Letterhead" 
            style="max-width:100%; height:auto;">
