@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div style="text-align:center; background:#f5f5f5; padding:20px;">
       <img src="img..png" 
            alt="Loop & Logic Letterhead" 
-           style="max-width:100%; height:auto;">
+           style="max-width: 500%; height:auto;">
     </div>
 
     <!-- Body -->
