@@ -74,14 +74,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      $reply->Body = '
   <div style="font-family: Arial, sans-serif; color:#333; margin:0; padding:0;">
     <!-- Letterhead -->
-    <div style="text-align:center; background:#f5f5f5; padding:20px;">
-      <img src="img..png" 
+    <div style="text-align:center; background:#f5f5f5; ;">
+      <img src="https://loopandlogic.dev/img/Heading.png" 
            alt="Loop & Logic Letterhead" 
-           style="max-width: 500%; height:auto;">
+           style="max-width: 500%; height:auto; text-align: center;">
+    
+
+ $reply->Body = '
+  <div style="background:#f5f5f5; margin:0; padding:0; width:100%; font-family: Arial, sans-serif; color:#333;">
+    
+    <!-- Letterhead -->
+    <div style="text-align:center; padding:20px 0;">
+      <img src="https://loopandlogic.dev/img/Heading.png" 
+           alt="Loop & Logic Letterhead" 
+           style="max-width:100%; height:auto;">
     </div>
 
     <!-- Body -->
-    <div style="padding:20px;">
+    <div style="background:#ffffff; padding:20px; margin: 0 auto; max-width:600px; border-radius:8px;">
       <p>Hi ' . $name . ',</p>
       <p>Thank you for booking an appointment. Here are the details we received:</p>
       <ul>
@@ -94,11 +104,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Footer -->
-    <div style="background:#0d47a1; color:white; text-align:center; padding:15px; font-size:12px;">
+    <div style="background:#0d47a1; color:white; text-align:center; padding:15px; font-size:12px; margin-top:20px;">
       <p>Loop & Logic • Nairobi, Kenya<br>
       <a href="https://looplogic.co.ke" style="color:#fff; text-decoration:none;">www.looplogic.co.ke</a></p>
     </div>
   </div>';
+
 
 
         $reply->send();
