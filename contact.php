@@ -71,8 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $reply->isHTML(true);
         $reply->Subject = "Appointment Request Received";
-     $reply->Body = '
-  <div style="font-family: Arial, sans-serif; color:#333; margin:0; padding:0; background:#f5f5f5;">
+     $reply->Body = '<div style="font-family: Arial, sans-serif; color:#333; margin:0; padding:0; background:#f5f5f5;">
     
     <!-- Letterhead -->
     <div style="text-align:center; padding:10px 0;">
@@ -82,10 +81,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Body -->
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#f4f4f4; padding:20px;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#f4f4f4; padding:10px;">
   <tr>
     <td align="center">
-      <div style="max-width:600px; background:#ffffff; border-radius:6px; padding:20px; text-align:justify; font-family:Arial, sans-serif; line-height:1.6; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+      <div style="max-width:600px; background:#ffffff; border-radius:6px; padding:70px; text-align:justify; font-family:Arial, sans-serif; line-height:1.6; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
         <p>Hi ' . $name . ',</p>
         <p>Thank you for booking an appointment. Here are the details we received:</p>
         <ul>
@@ -96,6 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>We will confirm shortly. If you need to update your request, just reply to this email.</p>
         <p>Best regards,<br><strong>Loop & Logic Team</strong></p>
       </div>
+        <div style="background: linear-gradient(90deg, #ffc0cb 0%, #a032a8 10%, #0000ff 45%, #4bbfc9 100%); color:white; text-align:center; padding:15px; font-size:12px; margin-top:20px;">
+      <p>Loop & Logic • Nairobi, Kenya<br>
+      <a href="https://looplogic.co.ke" style="color:#fff; text-decoration:none;">www.loopandlogic.dev</a></p>
+    </div>
     </td>
   </tr>
 </table>
@@ -103,10 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Footer -->
-    <div style="background:#0d47a1; color:white; text-align:center; padding:15px; font-size:12px; margin-top:20px;">
-      <p>Loop & Logic • Nairobi, Kenya<br>
-      <a href="https://looplogic.co.ke" style="color:#fff; text-decoration:none;">www.looplogic.co.ke</a></p>
-    </div>
+  
   </div>';
 
         $reply->send();
