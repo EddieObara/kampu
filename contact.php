@@ -74,17 +74,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      $reply->Body = '<div style="font-family: Arial, sans-serif; color:#333; margin:0; padding:0; background:#f5f5f5;">
     
     <!-- Letterhead -->
-    <div style="text-align:center; margin:0; padding:0;">
-      <img src="https://loopandlogic.dev/img/Heading.png" 
-           alt="Loop & Logic Letterhead" 
-           style="max-width:100%; height:auto; display:block; margin:0 auto;">
-    </div>
+    
 
     <!-- Body -->
     <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#f4f4f4; padding:10px;">
   <tr>
     <td align="center" valign="top">
       <div style="max-width:600px; background:#ffffff; border-radius:6px; padding:70px; text-align:justify; font-family:Arial, sans-serif; line-height:1.6; box-shadow:0 2px 8px rgba(0,0,0,0.1); margin-top:-30px;">
+      <div style="text-align:center; margin:0; padding:0;">
+      <img src="https://loopandlogic.dev/img/Heading.png" 
+           alt="Loop & Logic Letterhead" 
+           style="max-width:100%; height:auto; display:block; margin:0 auto;">
+    </div>
         <p>Hi ' . $name . ',</p>
         <p>Thank you for booking an appointment. Here are the details we received:</p>
         <ul>
