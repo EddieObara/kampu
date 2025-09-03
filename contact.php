@@ -94,20 +94,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </ul>
         <p>We will confirm shortly. If you need to update your request, just reply to this email.</p>
         <p>Best regards,<br><strong>Loop & Logic Team</strong></p>
+        <!-- Gradient footer inside white box -->
+        <div style="background: linear-gradient(90deg, #ffc0cb 0%, #0000ff 45%, #008000 100%); color:white; text-align:center; padding:15px; font-size:12px; margin:0 -70px -70px -70px; border-radius:0 0 6px 6px;">
+          <p>Loop & Logic • Nairobi, Kenya<br>
+          <a href="https://looplogic.co.ke" style="color:#fff; text-decoration:none;">www.loopandlogic.dev</a></p>
+        </div>
       </div>
-        <div style="background: linear-gradient(90deg, #ffc0cb 0%, #a032a8 10%, #0000ff 45%, #4bbfc9 100%); color:white; text-align:center; padding:15px; font-size:12px; margin-top:20px;">
-      <p>Loop & Logic • Nairobi, Kenya<br>
-      <a href="https://looplogic.co.ke" style="color:#fff; text-decoration:none;">www.loopandlogic.dev</a></p>
-    </div>
     </td>
   </tr>
 </table>
 
-    </div>
-
-    <!-- Footer -->
-  
-  </div>';
+    </div>';
 
         $reply->send();
 
