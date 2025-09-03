@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <tr>
     <td align="center" valign="top">
       <div style="max-width:600px; background:#ffffff; border-radius:6px; padding:70px; text-align:justify; font-family:Arial, sans-serif; line-height:1.6; box-shadow:0 2px 8px rgba(0,0,0,0.1); margin-top:-30px;">
-      <div style="text-align:center; margin:0; padding:0;">
+      <div style="background:#ffffff; text-align:center; margin:0; padding:0;">
       <img src="https://loopandlogic.dev/img/Heading.png" 
            alt="Loop & Logic Letterhead" 
            style="width:280px; height:auto; display:block; object-fit:contain; margin:0 auto; padding-bottom:-40px;">
