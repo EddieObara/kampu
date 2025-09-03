@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div style="text-align:center; margin:0; padding:0;">
       <img src="https://loopandlogic.dev/img/Heading.png" 
            alt="Loop & Logic Letterhead" 
-           style="width:280%; height:76; display:block; margin:0 auto;">
+           style="width:280px; height:auto; display:block; object-fit:contain; margin:0 auto; padding-bottom:-40px;">
     </div>
         <p>Hi ' . $name . ',</p>
         <p>Thank you for booking an appointment. Here are the details we received:</p>
