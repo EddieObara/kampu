@@ -94,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </ul>
         <p>We will confirm shortly. If you need to update your request, just reply to this email.</p>
         <p>Best regards,<br><strong>Loop & Logic Team</strong></p>
+        <br><br><br>
         <!-- Gradient footer inside white box -->
         <div style="background: linear-gradient(90deg, #ffc0cb 0%, #0000ff 45%, #008000 100%); color:white; text-align:center; padding:15px; font-size:12px; margin:0 -70px -70px -70px; border-radius:0 0 6px 6px;">
           <p>Loop & Logic • Nairobi, Kenya<br>
