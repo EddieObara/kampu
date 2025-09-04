@@ -372,6 +372,90 @@ document.getElementById("newsletterForm").addEventListener("submit", function(e)
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form");
+  const responseDiv = document.getElementById("form-response");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch("contact.php", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        responseDiv.style.color = "green";
+        responseDiv.textContent = "✅ " + data.message;
+        form.reset();
+
+        // Fade away after 4 seconds
+        setTimeout(() => {
+          responseDiv.style.transition = "opacity 1s ease";
+          responseDiv.style.opacity = "0";
+          setTimeout(() => {
+            responseDiv.textContent = "";
+            responseDiv.style.opacity = "1"; // reset for next use
+          }, 1000);
+        }, 4000);
+
+      } else {
+        responseDiv.style.color = "red";
+        responseDiv.textContent = "❌ " + (data.error || "Something went wrong.");
+
+        // Stay visible for 10 seconds
+        setTimeout(() => {
+          responseDiv.textContent = "";
+        }, 10000);
+      }
+
+    } catch (error) {
+      responseDiv.style.color = "red";
+      responseDiv.textContent = "❌ Network error. Please try again.";
+
+      // Stay visible for 10 seconds
+      setTimeout(() => {
+        responseDiv.textContent = "";
+      }, 10000);
+    }
+  });
+});
+</script>
+
+<script>
+document.getElementById("appointmentForm").addEventListener("submit", function(e) {
+  e.preventDefault(); // stop default form submission
+
+  let formData = new FormData(this);
+
+  fetch("contact.php", {
+    method: "POST",
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    let msgBox = document.getElementById("responseMessage");
+    if (data.success) {
+      msgBox.style.color = "green";
+      msgBox.textContent = data.message;
+      this.reset(); // clear form if needed
+    } else {
+      msgBox.style.color = "red";
+      msgBox.textContent = "Something went wrong. Try again.";
+    }
+  })
+  .catch(error => {
+    document.getElementById("responseMessage").textContent = "Error: " + error;
+  });
+});
+</script>
+
 </body>
 
 </html>
