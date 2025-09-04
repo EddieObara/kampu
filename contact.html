@@ -133,95 +133,107 @@
     <!-- Page Header End -->
 
 
-    <!-- Contact Start -->
-    <div class="pt-6 pb-6">
-        <div class="container-fluid appoinment py-5 wow fadeIn" data-wow-delay="0.1s">
-            <div class="container pt-5">
-                <div class="row gy-5 gx-0">
-                    <div class="col-lg-6 pe-lg-5 wow fadeIn" data-wow-delay="0.3s">
-                        <h1 class="display-6 text-uppercase text-white mb-4">Have Any Query? Feel Free To Contact Us
-                        </h1>
-                        <p class="text-white mb-5 wow fadeIn" data-wow-delay="0.4s">The contact form is currently inactive. Get 
-                            a functional and working contact form with Ajax 
-                            & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-                        <div class="d-flex align-items-start wow fadeIn" data-wow-delay="0.5s">
-                            <div class="btn-lg-square bg-white">
-                                <i class="bi bi-envelope-at text-dark fs-3"></i>
-                            </div>
-                            <div class="ms-3">
-                                <h6 class="text-white text-uppercase">Mail Us</h6>
-                                <span class="text-white">info@example.com</span>
-                            </div>
+<!-- Appoinment Start -->
+    <div class="container-fluid appoinment mt-6 mb-6 py-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container pt-5">
+            <div class="row gy-5 gx-0">
+                <div class="col-lg-6 pe-lg-5 wow fadeIn" data-wow-delay="0.3s">
+                    <h1 class="display-6 text-uppercase text-white mb-4">Schedule Your Project with Ease
+                    </h1>
+                    <p class="text-white mb-5 wow fadeIn" data-wow-delay="0.4s">You prefer a virtual meeting? Book an online
+                         video appointment with our team to discuss your app or web
+                         development needs — anytime, anywhere. We're ready when you are.</p>
+                    <div class="d-flex align-items-start wow fadeIn" data-wow-delay="0.5s">
+                        <div class="btn-lg-square bg-white">
+                            <i class="bi bi-geo-alt text-dark fs-3"></i>
                         </div>
-                        <hr class="bg-body">
-                        <div class="d-flex align-items-start wow fadeIn" data-wow-delay="0.6s">
-                            <div class="btn-lg-square bg-white">
-                                <i class="bi bi-telephone text-dark fs-3"></i>
-                            </div>
-                            <div class="ms-3">
-                                <h6 class="text-white text-uppercase">Call Us</h6>
-                                <span class="text-white">+012 345 67890</span>
-                            </div>
+                        <div class="ms-3">
+                            <h6 class="text-white text-uppercase">Office Address</h6>
+                            <span class="text-white">Norwich Union House, Mamangina Street</span>
                         </div>
                     </div>
-                    <div class="col-lg-6 mb-n5 wow fadeIn" data-wow-delay="0.7s">
-                        <div class="bg-white p-5">
-                            <h2 class="text-uppercase mb-4">Contact Us</h2>
-                            <form action="contact.php" method="POST">
-                          <input type="hidden" name="redirect" value="contact.html">
-    <div class="row g-3">
-        <div class="col-sm-6">
-            <div class="form-floating">
-                <input type="text" name="name" class="form-control border-0 bg-light" id="name" placeholder="Your Name" required>
-                <label for="name">Your Name</label>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-floating">
-                <input type="email" name="email" class="form-control border-0 bg-light" id="mail" placeholder="Your Email" required>
-                <label for="mail">Your Email</label>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-floating">
-                <input type="text" name="mobile" class="form-control border-0 bg-light" id="mobile" placeholder="Your Mobile">
-                <label for="mobile">Your Mobile</label>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-floating">
-                <select name="service" class="form-select border-0 bg-light" id="service" required>
-                    <option value="App Development" selected>App Development</option>
-                    <option value="Web Development">Web Development</option>
-                </select>
-                <label for="service">Choose A Service</label>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="form-floating">
-                <textarea name="message" class="form-control border-0 bg-light" placeholder="Leave a message here" id="message" style="height: 130px" required></textarea>
-                <label for="message">Message</label>
-            </div>
-        </div>
-        <div class="col-12 text-center">
-            <button class="btn btn-primary w-100 py-3" type="submit">Submit Now</button>
-        </div>
-    </div>
-</form>
-
+                    <hr class="bg-body">
+                    <div class="d-flex align-items-start wow fadeIn" data-wow-delay="0.6s">
+                        <div class="btn-lg-square bg-white">
+                            <i class="bi bi-clock text-dark fs-3"></i>
                         </div>
+                        <div class="ms-3">
+                            <h6 class="text-white text-uppercase">Office Time</h6>
+                            <span class="text-white">Mon-Sat 09am-5pm, Sun Closed</span>
+                        </div>
+                    </div>
+                </div>
+               <div class="col-lg-6 mb-n5 wow fadeIn" data-wow-delay="0.7s">
+    <div class="bg-white p-5">
+        <h2 class="text-uppercase mb-4">Online Appointment</h2>
+        <form id="contact-form" action="contact.php" method="POST">
+            <input type="hidden" name="redirect" value="index.html">
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <div class="form-floating">
+                        <input type="text" name="name" class="form-control border-0 bg-light" id="name" placeholder="Your Name" required>
+                        <label for="name">Your Name</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-floating">
+                        <input type="email" name="email" class="form-control border-0 bg-light" id="mail" placeholder="Your Email" required>
+                        <label for="mail">Your Email</label>
+                    </div>
+                </div>
+
+                <!-- Date Picker -->
+                <div class="col-sm-6">
+                    <div class="form-floating">
+                        <input type="date" name="date" class="form-control border-0 bg-light" id="date" required>
+                        <label for="date">Preferred Date</label>
+                    </div>
+                </div>
+
+                <!-- Time Picker -->
+                <div class="col-sm-6">
+                    <div class="form-floating">
+                        <input type="time" name="time" class="form-control border-0 bg-light" id="time" required>
+                        <label for="time">Preferred Time</label>
+                    </div>
+                </div>
+
+                <!-- Meeting Preference -->
+                <div class="col-sm-6">
+                    <div class="form-floating">
+                        <select name="meeting" class="form-select border-0 bg-light" id="meeting" required>
+                            <option value="Google Meet" selected>Google Meet</option>
+                            <option value="Zoom">Zoom</option>
+                        </select>
+                        <label for="meeting">Meeting Preference</label>
+                    </div>
+                </div>
+
+                <!-- Message -->
+                <div class="col-12">
+                    <div class="form-floating">
+                        <textarea name="message" class="form-control border-0 bg-light" placeholder="Leave a message here" id="message" style="height: 130px" required></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="col-12 text-center">
+                    <button class="btn btn-primary w-100 py-3" type="submit">Submit Now</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Placeholder for feedback -->
+<div id="form-response" style="margin-top:10px; font-weight:bold;"></div>
+
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid px-0 wow fadeInUp" data-wow-delay="0.5s">
-            <iframe class="w-100 h-100"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1994.7406851503173!2d36.8219462157555!3d-1.283329035631092!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d5c146c7a1%3A0x3ea2f98327c876d6!2sNorwich%20Union%20House%2C%20Nairobi%2C%20Kenya!5e0!3m2!1sen!2ske!4v1691251999870!5m2!1sen!2ske"
-            frameborder="0" style="min-height: 500px; border:0;" allowfullscreen="" aria-hidden="false"
-            tabindex="0"></iframe>
-        </div>
     </div>
-    <!-- Contact End -->
+    <!-- Appoinment End -->
 
 
     <div class="container-fluid newsletter mt-6 wow fadeIn" data-wow-delay="0.1s">
